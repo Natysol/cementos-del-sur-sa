@@ -31,7 +31,7 @@ function agregarFila(){
       $0
     </td>
 
-    <td>
+    <td class="no-pdf">
       <button class="eliminar">
         X
       </button>
@@ -126,12 +126,6 @@ function calcular(){
 
 }
 
-function guardarPresupuesto(){
-
-  alert("Presupuesto guardado");
-
-}
-
 function nuevoPresupuesto(){
 
   location.reload();
@@ -139,6 +133,20 @@ function nuevoPresupuesto(){
 }
 
 async function generarPDF(){
+
+  const sidebar =
+  document.querySelector(".sidebar");
+
+  const elementos =
+  document.querySelectorAll(".no-pdf");
+
+  sidebar.style.display = "none";
+
+  elementos.forEach(el=>{
+
+    el.style.display = "none";
+
+  });
 
   const elemento =
   document.getElementById("presupuesto");
@@ -173,6 +181,14 @@ async function generarPDF(){
   );
 
   pdf.save("presupuesto.pdf");
+
+  sidebar.style.display = "block";
+
+  elementos.forEach(el=>{
+
+    el.style.display = "";
+
+  });
 
 }
 
