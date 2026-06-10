@@ -8,7 +8,9 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Cementos del Sur</title>
+  <title>
+    Cementos del Sur
+  </title>
 
   <link rel="stylesheet" href="styles.css">
 
@@ -30,10 +32,6 @@
       Nuevo Presupuesto
     </button>
 
-    <button onclick="guardarPresupuesto()">
-      Guardar
-    </button>
-
     <button onclick="generarPDF()">
       Generar PDF
     </button>
@@ -48,7 +46,7 @@
 
         <div>
 
-          <img src="logo.jpg" class="logo">
+          <img src="assets/logo.jpeg" class="logo">
 
         </div>
 
@@ -162,7 +160,7 @@
               Total
             </th>
 
-            <th>
+            <th class="no-pdf">
             </th>
 
           </tr>
@@ -175,7 +173,7 @@
 
       </table>
 
-      <button class="agregar" onclick="agregarFila()">
+      <button class="agregar no-pdf" onclick="agregarFila()">
         + Agregar Producto
       </button>
 
