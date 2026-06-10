@@ -1,176 +1,180 @@
 
+const tbody = document.getElementById("tbody");
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Arial, Helvetica, sans-serif;
+document.getElementById("fecha").innerHTML =
+new Date().toLocaleDateString("es-AR");
+
+document.getElementById("numero").value =
+"PRES-" + Math.floor(Math.random() * 100000);
+
+document.getElementById("condicionIVA")
+.addEventListener("change", calcular);
+
+function agregarFila(){
+
+  const fila = document.createElement("tr");
+
+  fila.innerHTML = `
+
+    <td>
+      <input type="number" class="cantidad" value="1">
+    </td>
+
+    <td>
+      <input type="text" class="descripcion">
+    </td>
+
+    <td>
+      <input type="number" class="precio" value="0">
+    </td>
+
+    <td class="totalFila">
+      $0
+    </td>
+
+    <td>
+      <button class="eliminar">
+        X
+      </button>
+    </td>
+
+  `;
+
+  tbody.appendChild(fila);
+
+  eventosFila(fila);
+
+  calcular();
+
 }
 
-body{
-  display:flex;
-  min-height:100vh;
-  background:#ececec;
+function eventosFila(fila){
+
+  fila.querySelector(".cantidad")
+  .addEventListener("input", calcular);
+
+  fila.querySelector(".precio")
+  .addEventListener("input", calcular);
+
+  fila.querySelector(".eliminar")
+  .addEventListener("click", ()=>{
+
+    fila.remove();
+
+    calcular();
+
+  });
+
 }
 
-.sidebar{
-  width:250px;
-  background:#1d1d1d;
-  color:white;
-  padding:30px;
-}
+function calcular(){
 
-.sidebar h2{
-  margin-bottom:40px;
-}
+  let subtotal = 0;
 
-.sidebar button{
-  width:100%;
-  margin-bottom:15px;
-  padding:14px;
-  border:none;
-  border-radius:6px;
-  cursor:pointer;
-  background:#93c83d;
-  font-weight:bold;
-}
+  document.querySelectorAll("#tbody tr")
+  .forEach(fila=>{
 
-.main{
-  flex:1;
-  padding:30px;
-}
+    const cantidad =
+    parseFloat(
+      fila.querySelector(".cantidad").value
+    ) || 0;
 
-.container{
-  background:white;
-  padding:40px;
-  border-radius:10px;
-  box-shadow:0 0 15px rgba(0,0,0,0.1);
-}
+    const precio =
+    parseFloat(
+      fila.querySelector(".precio").value
+    ) || 0;
 
-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:30px;
-}
+    const total = cantidad * precio;
 
-.logo{
-  width:230px;
-}
+    fila.querySelector(".totalFila").innerHTML =
+    "$ " + total.toLocaleString("es-AR");
 
-.empresa{
-  text-align:right;
-  line-height:1.7;
-}
+    subtotal += total;
 
-.cliente-box{
-  border:2px solid black;
-  padding:20px;
-  margin-bottom:30px;
+  });
 
-  display:grid;
+  const condicion =
+  document.getElementById("condicionIVA").value;
 
-  grid-template-columns:1fr 1fr;
+  let iva = 0;
 
-  gap:20px;
-}
+  let totalFinal = subtotal;
 
-.cliente-box input,
-.cliente-box select{
-  width:100%;
-  padding:10px;
-  margin-top:5px;
-}
+  if(condicion === "ri"){
 
-h1{
-  background:#93c83d;
-  text-align:center;
-  padding:12px;
-  margin-bottom:20px;
-}
+    iva = subtotal * 0.21;
 
-table{
-  width:100%;
-  border-collapse:collapse;
-}
+    totalFinal = subtotal + iva;
 
-table th{
-  background:#93c83d;
-  border:2px solid black;
-  padding:10px;
-}
+    document.getElementById("filaIVA").style.display =
+    "flex";
 
-table td{
-  border:1px solid black;
-  padding:10px;
-}
+  }else{
 
-table input{
-  width:100%;
-  border:none;
-  outline:none;
-}
+    document.getElementById("filaIVA").style.display =
+    "none";
 
-.agregar{
-  margin-top:20px;
-  padding:12px 20px;
-  border:none;
-  background:black;
-  color:white;
-  cursor:pointer;
-  border-radius:6px;
-}
-
-.eliminar{
-  background:red;
-  color:white;
-  border:none;
-  padding:8px;
-  cursor:pointer;
-}
-
-.totales{
-  width:350px;
-  margin-left:auto;
-  margin-top:40px;
-}
-
-.totales div{
-  display:flex;
-  justify-content:space-between;
-  margin-bottom:15px;
-  font-size:18px;
-}
-
-.final{
-  font-size:24px !important;
-}
-
-.nota{
-  margin-top:40px;
-  background:#d9d9d9;
-  padding:12px;
-  text-align:center;
-  font-weight:bold;
-}
-
-@media(max-width:900px){
-
-  body{
-    flex-direction:column;
   }
 
-  .sidebar{
-    width:100%;
-  }
+  document.getElementById("subtotal").innerHTML =
+  "$ " + subtotal.toLocaleString("es-AR");
 
-  .cliente-box{
-    grid-template-columns:1fr;
-  }
+  document.getElementById("iva").innerHTML =
+  "$ " + iva.toLocaleString("es-AR");
 
-  header{
-    flex-direction:column;
-    gap:20px;
-  }
+  document.getElementById("total").innerHTML =
+  "$ " + totalFinal.toLocaleString("es-AR");
 
 }
+
+function guardarPresupuesto(){
+
+  alert("Presupuesto guardado");
+
+}
+
+function nuevoPresupuesto(){
+
+  location.reload();
+
+}
+
+async function generarPDF(){
+
+  const elemento =
+  document.getElementById("presupuesto");
+
+  const canvas = await html2canvas(elemento, {
+
+    scale:2
+
+  });
+
+  const imgData =
+  canvas.toDataURL("image/png");
+
+  const { jsPDF } = window.jspdf;
+
+  const pdf =
+  new jsPDF("p", "mm", "a4");
+
+  const width =
+  pdf.internal.pageSize.getWidth();
+
+  const height =
+  (canvas.height * width) / canvas.width;
+
+  pdf.addImage(
+    imgData,
+    "PNG",
+    0,
+    0,
+    width,
+    height
+  );
+
+  pdf.save("presupuesto.pdf");
+
+}
+
+agregarFila();
