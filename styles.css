@@ -11,6 +11,8 @@ body{
   background:#ececec;
 }
 
+/* SIDEBAR */
+
 .sidebar{
   width:250px;
   background:#1d1d1d;
@@ -20,47 +22,63 @@ body{
 
 .sidebar h2{
   margin-bottom:40px;
+  font-size:34px;
+  line-height:1.1;
 }
 
 .sidebar button{
   width:100%;
   margin-bottom:15px;
-  padding:14px;
+  padding:16px;
   border:none;
-  border-radius:6px;
+  border-radius:8px;
   cursor:pointer;
   background:#93c83d;
   font-weight:bold;
   font-size:16px;
 }
 
+/* MAIN */
+
 .main{
   flex:1;
   padding:30px;
 }
 
+/* CONTENEDOR */
+
 .container{
   background:white;
   padding:40px;
-  border-radius:10px;
+  border-radius:12px;
   box-shadow:0 0 15px rgba(0,0,0,0.1);
 }
+
+/* HEADER */
 
 header{
   display:flex;
   justify-content:space-between;
   align-items:center;
   margin-bottom:30px;
+  gap:20px;
 }
 
 .logo{
   width:240px;
+  max-width:100%;
 }
 
 .empresa{
   text-align:right;
   line-height:1.7;
 }
+
+.empresa h2{
+  font-size:40px;
+}
+
+/* CLIENTE */
 
 .cliente-box{
   border:2px solid black;
@@ -77,17 +95,22 @@ header{
 .cliente-box input,
 .cliente-box select{
   width:100%;
-  padding:10px;
+  padding:12px;
   margin-top:5px;
   font-size:15px;
 }
 
+/* TITULO */
+
 h1{
   background:#93c83d;
   text-align:center;
-  padding:12px;
+  padding:14px;
   margin-bottom:20px;
+  font-size:42px;
 }
+
+/* TABLA */
 
 table{
   width:100%;
@@ -97,7 +120,8 @@ table{
 table th{
   background:#93c83d;
   border:2px solid black;
-  padding:10px;
+  padding:12px;
+  font-size:16px;
 }
 
 table td{
@@ -110,26 +134,32 @@ table input{
   border:none;
   outline:none;
   font-size:15px;
+  padding:5px;
 }
+
+/* BOTONES */
 
 .agregar{
   margin-top:20px;
-  padding:12px 20px;
+  padding:14px 24px;
   border:none;
   background:black;
   color:white;
   cursor:pointer;
   border-radius:6px;
-  font-size:15px;
+  font-size:16px;
 }
 
 .eliminar{
   background:red;
   color:white;
   border:none;
-  padding:8px;
+  padding:10px;
   cursor:pointer;
+  border-radius:4px;
 }
+
+/* TOTALES */
 
 .totales{
   width:350px;
@@ -141,21 +171,27 @@ table input{
   display:flex;
   justify-content:space-between;
   margin-bottom:15px;
-  font-size:18px;
+  font-size:22px;
 }
 
 .final{
-  font-size:28px !important;
+  font-size:34px !important;
   font-weight:bold;
 }
+
+/* NOTA */
 
 .nota{
   margin-top:40px;
   background:#d9d9d9;
-  padding:12px;
+  padding:14px;
   text-align:center;
   font-weight:bold;
 }
+
+/* ========================= */
+/* RESPONSIVE */
+/* ========================= */
 
 @media(max-width:900px){
 
@@ -165,15 +201,110 @@ table input{
 
   .sidebar{
     width:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+
+  .sidebar h2{
+    text-align:center;
+    font-size:30px;
+  }
+
+  .main{
+    padding:10px;
+  }
+
+  .container{
+    padding:15px;
+  }
+
+  header{
+    flex-direction:column;
+    text-align:center;
+  }
+
+  .empresa{
+    text-align:center;
+  }
+
+  .empresa h2{
+    font-size:28px;
   }
 
   .cliente-box{
     grid-template-columns:1fr;
   }
 
-  header{
-    flex-direction:column;
-    gap:20px;
+  h1{
+    font-size:30px;
+  }
+
+  /* TABLA RESPONSIVE */
+
+  table{
+    display:block;
+    overflow-x:auto;
+    white-space:nowrap;
+  }
+
+  table th{
+    font-size:14px;
+  }
+
+  table td{
+    font-size:14px;
+  }
+
+  .agregar{
+    width:100%;
+  }
+
+  .totales{
+    width:100%;
+  }
+
+  .totales div{
+    font-size:18px;
+  }
+
+  .final{
+    font-size:28px !important;
+  }
+
+  .nota{
+    font-size:14px;
+  }
+
+}
+
+/* CELULARES PEQUEÑOS */
+
+@media(max-width:500px){
+
+  .sidebar{
+    padding:20px;
+  }
+
+  .sidebar button{
+    font-size:15px;
+    padding:14px;
+  }
+
+  .empresa h2{
+    font-size:24px;
+  }
+
+  h1{
+    font-size:24px;
+  }
+
+  .totales div{
+    font-size:16px;
+  }
+
+  .final{
+    font-size:24px !important;
   }
 
 }
