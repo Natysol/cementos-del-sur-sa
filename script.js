@@ -1,139 +1,176 @@
 
-const tbody = document.getElementById("tbody");
 
-document.getElementById("fecha").innerHTML =
-  new Date().toLocaleDateString("es-AR");
-
-document.getElementById("numero").value =
-  "PRES-" + Math.floor(Math.random() * 100000);
-
-function agregarFila(){
-
-  const fila = document.createElement("tr");
-
-  fila.innerHTML = `
-    <td>
-      <input type="number" class="cantidad" value="1">
-    </td>
-
-    <td>
-      <input type="text" class="descripcion">
-    </td>
-
-    <td>
-      <input type="number" class="precio" value="0">
-    </td>
-
-    <td class="totalFila">$0</td>
-
-    <td>
-      <button class="eliminar">X</button>
-    </td>
-  `;
-
-  tbody.appendChild(fila);
-
-  eventos(fila);
-
-  calcular();
-
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial, Helvetica, sans-serif;
 }
 
-function eventos(fila){
-
-  fila.querySelector(".cantidad")
-    .addEventListener("input", calcular);
-
-  fila.querySelector(".precio")
-    .addEventListener("input", calcular);
-
-  fila.querySelector(".eliminar")
-    .addEventListener("click", ()=>{
-
-      fila.remove();
-      calcular();
-
-    });
-
+body{
+  display:flex;
+  min-height:100vh;
+  background:#ececec;
 }
 
-function calcular(){
-
-  let subtotal = 0;
-
-  document.querySelectorAll("#tbody tr")
-    .forEach(fila=>{
-
-      const cantidad =
-        parseFloat(fila.querySelector(".cantidad").value) || 0;
-
-      const precio =
-        parseFloat(fila.querySelector(".precio").value) || 0;
-
-      const total = cantidad * precio;
-
-      fila.querySelector(".totalFila").innerHTML =
-        "$ " + total.toLocaleString("es-AR");
-
-      subtotal += total;
-
-    });
-
-  const iva = subtotal * 0.21;
-  const totalFinal = subtotal + iva;
-
-  document.getElementById("subtotal").innerHTML =
-    "$ " + subtotal.toLocaleString("es-AR");
-
-  document.getElementById("iva").innerHTML =
-    "$ " + iva.toLocaleString("es-AR");
-
-  document.getElementById("total").innerHTML =
-    "$ " + totalFinal.toLocaleString("es-AR");
-
+.sidebar{
+  width:250px;
+  background:#1d1d1d;
+  color:white;
+  padding:30px;
 }
 
-function guardarPresupuesto(){
-
-  const datos = {
-    cliente: document.getElementById("cliente").value,
-    domicilio: document.getElementById("domicilio").value
-  };
-
-  localStorage.setItem("presupuesto", JSON.stringify(datos));
-
-  alert("Presupuesto guardado");
-
+.sidebar h2{
+  margin-bottom:40px;
 }
 
-function nuevoPresupuesto(){
-
-  location.reload();
-
+.sidebar button{
+  width:100%;
+  margin-bottom:15px;
+  padding:14px;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+  background:#93c83d;
+  font-weight:bold;
 }
 
-async function generarPDF(){
-
-  const elemento = document.getElementById("presupuesto");
-
-  const canvas = await html2canvas(elemento, {
-    scale:2
-  });
-
-  const imgData = canvas.toDataURL("image/png");
-
-  const { jsPDF } = window.jspdf;
-
-  const pdf = new jsPDF("p", "mm", "a4");
-
-  const width = pdf.internal.pageSize.getWidth();
-
-  const height = (canvas.height * width) / canvas.width;
-
-  pdf.addImage(imgData, "PNG", 0, 0, width, height);
-
-  pdf.save("presupuesto.pdf");
-
+.main{
+  flex:1;
+  padding:30px;
 }
 
-agregarFila();
+.container{
+  background:white;
+  padding:40px;
+  border-radius:10px;
+  box-shadow:0 0 15px rgba(0,0,0,0.1);
+}
+
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:30px;
+}
+
+.logo{
+  width:230px;
+}
+
+.empresa{
+  text-align:right;
+  line-height:1.7;
+}
+
+.cliente-box{
+  border:2px solid black;
+  padding:20px;
+  margin-bottom:30px;
+
+  display:grid;
+
+  grid-template-columns:1fr 1fr;
+
+  gap:20px;
+}
+
+.cliente-box input,
+.cliente-box select{
+  width:100%;
+  padding:10px;
+  margin-top:5px;
+}
+
+h1{
+  background:#93c83d;
+  text-align:center;
+  padding:12px;
+  margin-bottom:20px;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+table th{
+  background:#93c83d;
+  border:2px solid black;
+  padding:10px;
+}
+
+table td{
+  border:1px solid black;
+  padding:10px;
+}
+
+table input{
+  width:100%;
+  border:none;
+  outline:none;
+}
+
+.agregar{
+  margin-top:20px;
+  padding:12px 20px;
+  border:none;
+  background:black;
+  color:white;
+  cursor:pointer;
+  border-radius:6px;
+}
+
+.eliminar{
+  background:red;
+  color:white;
+  border:none;
+  padding:8px;
+  cursor:pointer;
+}
+
+.totales{
+  width:350px;
+  margin-left:auto;
+  margin-top:40px;
+}
+
+.totales div{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:15px;
+  font-size:18px;
+}
+
+.final{
+  font-size:24px !important;
+}
+
+.nota{
+  margin-top:40px;
+  background:#d9d9d9;
+  padding:12px;
+  text-align:center;
+  font-weight:bold;
+}
+
+@media(max-width:900px){
+
+  body{
+    flex-direction:column;
+  }
+
+  .sidebar{
+    width:100%;
+  }
+
+  .cliente-box{
+    grid-template-columns:1fr;
+  }
+
+  header{
+    flex-direction:column;
+    gap:20px;
+  }
+
+}
