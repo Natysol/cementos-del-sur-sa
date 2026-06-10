@@ -1,4 +1,3 @@
-
 const tbody = document.getElementById("tbody");
 
 document.getElementById("fecha").innerHTML =
