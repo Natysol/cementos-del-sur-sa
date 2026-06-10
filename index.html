@@ -1,0 +1,129 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cementos del Sur - Sistema de Presupuestos</title>
+
+  <link rel="stylesheet" href="styles.css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+
+<body>
+
+<div class="sidebar">
+
+  <h2>Cementos del Sur</h2>
+
+  <button onclick="nuevoPresupuesto()">
+    Nuevo Presupuesto
+  </button>
+
+  <button onclick="guardarPresupuesto()">
+    Guardar
+  </button>
+
+  <button onclick="generarPDF()">
+    Generar PDF
+  </button>
+
+</div>
+
+<div class="main">
+
+  <div class="container" id="presupuesto">
+
+    <header>
+
+      <div class="logo-area">
+        <img src="assets/logo.png" class="logo">
+      </div>
+
+      <div class="empresa">
+        <h2>CEMENTOS DEL SUR S.A</h2>
+
+        <p>Planta: Parque Industrial - Viedma</p>
+        <p>Administración: Colón Nº 639 - Viedma</p>
+
+        <br>
+
+        <p id="fecha"></p>
+      </div>
+
+    </header>
+
+    <section class="cliente-box">
+
+      <div>
+        <label>Cliente</label>
+        <input type="text" id="cliente">
+      </div>
+
+      <div>
+        <label>Domicilio</label>
+        <input type="text" id="domicilio">
+      </div>
+
+      <div>
+        <label>Presupuesto Nº</label>
+        <input type="text" id="numero">
+      </div>
+
+    </section>
+
+    <h1>PRESUPUESTO</h1>
+
+    <table id="tabla">
+
+      <thead>
+        <tr>
+          <th>Cant</th>
+          <th>Descripción</th>
+          <th>Precio Unit</th>
+          <th>Total</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody id="tbody"></tbody>
+
+    </table>
+
+    <button class="agregar" onclick="agregarFila()">
+      + Agregar Producto
+    </button>
+
+    <section class="totales">
+
+      <div>
+        <span>Subtotal</span>
+        <strong id="subtotal">$0</strong>
+      </div>
+
+      <div>
+        <span>IVA 21%</span>
+        <strong id="iva">$0</strong>
+      </div>
+
+      <div class="final">
+        <span>TOTAL</span>
+        <strong id="total">$0</strong>
+      </div>
+
+    </section>
+
+    <div class="nota">
+      Los precios del presente presupuesto tienen una vigencia de 7 días corridos.
+    </div>
+
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
