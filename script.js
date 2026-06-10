@@ -16,15 +16,20 @@ function agregarFila(){
   fila.innerHTML = `
 
     <td>
-      <input type="number" class="cantidad" value="1">
+      <input type="number"
+             class="cantidad"
+             value="1">
     </td>
 
     <td>
-      <input type="text" class="descripcion">
+      <input type="text"
+             class="descripcion">
     </td>
 
     <td>
-      <input type="number" class="precio" value="0">
+      <input type="number"
+             class="precio"
+             value="0">
     </td>
 
     <td class="totalFila">
@@ -140,6 +145,19 @@ async function generarPDF(){
   const elementos =
   document.querySelectorAll(".no-pdf");
 
+  const contenedor =
+  document.getElementById("presupuesto");
+
+  // GUARDAR ESTILOS ORIGINALES
+
+  const anchoOriginal =
+  contenedor.style.width;
+
+  const marginOriginal =
+  contenedor.style.margin;
+
+  // OCULTAR ELEMENTOS
+
   sidebar.style.display = "none";
 
   elementos.forEach(el=>{
@@ -148,39 +166,78 @@ async function generarPDF(){
 
   });
 
-  const elemento =
-  document.getElementById("presupuesto");
+  // AJUSTAR A4
 
-  const canvas = await html2canvas(elemento, {
+  contenedor.style.width = "794px";
 
-    scale:2
+  contenedor.style.margin = "0 auto";
+
+  // ESPERAR RENDER
+
+  await new Promise(resolve =>
+    setTimeout(resolve, 500)
+  );
+
+  // CAPTURAR
+
+  const canvas = await html2canvas(contenedor, {
+
+    scale:3,
+
+    useCORS:true,
+
+    scrollX:0,
+
+    scrollY:0
 
   });
 
   const imgData =
-  canvas.toDataURL("image/png");
+  canvas.toDataURL("image/jpeg", 1.0);
 
   const { jsPDF } = window.jspdf;
 
   const pdf =
-  new jsPDF("p", "mm", "a4");
+  new jsPDF({
 
-  const width =
-  pdf.internal.pageSize.getWidth();
+    orientation:"portrait",
 
-  const height =
-  (canvas.height * width) / canvas.width;
+    unit:"mm",
+
+    format:"a4"
+
+  });
+
+  const pdfWidth = 210;
+
+  const pdfHeight =
+  (canvas.height * pdfWidth) / canvas.width;
 
   pdf.addImage(
+
     imgData,
-    "PNG",
+
+    "JPEG",
+
     0,
+
     0,
-    width,
-    height
+
+    pdfWidth,
+
+    pdfHeight
+
   );
 
   pdf.save("presupuesto.pdf");
+
+  // RESTAURAR
+
+  contenedor.style.width =
+  anchoOriginal;
+
+  contenedor.style.margin =
+  marginOriginal;
 
   sidebar.style.display = "block";
 
