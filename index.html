@@ -1,22 +1,18 @@
 
+```html
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
 
   <meta charset="UTF-8">
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>
-    Cementos del Sur
-  </title>
+  <title>Cementos del Sur</title>
 
   <link rel="stylesheet" href="styles.css">
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
 </head>
 
@@ -24,9 +20,7 @@
 
   <div class="sidebar">
 
-    <h2>
-      Cementos del Sur
-    </h2>
+    <h2>Cementos del Sur</h2>
 
     <button onclick="nuevoPresupuesto()">
       Nuevo Presupuesto
@@ -45,24 +39,16 @@
       <header>
 
         <div>
-
-          <img src="logo.jpg" class="logo">
-
+          <img src="logo.jpg" class="logo" alt="Logo">
         </div>
 
         <div class="empresa">
 
-          <h2>
-            CEMENTOS DEL SUR S.A
-          </h2>
+          <h2>CEMENTOS DEL SUR S.A.</h2>
 
-          <p>
-            Planta: Parque Industrial - Viedma
-          </p>
+          <p>Planta: Parque Industrial - Viedma</p>
 
-          <p>
-            Administración: Colón Nº 639 - Viedma
-          </p>
+          <p>Administración: Colón Nº 639 - Viedma</p>
 
           <br>
 
@@ -76,9 +62,7 @@
 
         <div>
 
-          <label>
-            Cliente
-          </label>
+          <label>Cliente</label>
 
           <input type="text" id="cliente">
 
@@ -86,9 +70,7 @@
 
         <div>
 
-          <label>
-            Domicilio
-          </label>
+          <label>Domicilio</label>
 
           <input type="text" id="domicilio">
 
@@ -96,27 +78,17 @@
 
         <div>
 
-          <label>
-            Condición IVA
-          </label>
+          <label>Condición IVA</label>
 
           <select id="condicionIVA">
 
-            <option value="ri">
-              Responsable Inscripto
-            </option>
+            <option value="ri">Responsable Inscripto</option>
 
-            <option value="cf">
-              Consumidor Final
-            </option>
+            <option value="cf">Consumidor Final</option>
 
-            <option value="mono">
-              Monotributista
-            </option>
+            <option value="mono">Monotributista</option>
 
-            <option value="exento">
-              Exento
-            </option>
+            <option value="exento">Exento</option>
 
           </select>
 
@@ -124,9 +96,7 @@
 
         <div>
 
-          <label>
-            Presupuesto Nº
-          </label>
+          <label>Presupuesto Nº</label>
 
           <input type="text" id="numero">
 
@@ -134,9 +104,7 @@
 
       </section>
 
-      <h1>
-        PRESUPUESTO
-      </h1>
+      <h1>PRESUPUESTO</h1>
 
       <table>
 
@@ -144,24 +112,15 @@
 
           <tr>
 
-            <th>
-              Cant
-            </th>
+            <th>Cant</th>
 
-            <th>
-              Descripción
-            </th>
+            <th>Descripción</th>
 
-            <th>
-              Precio Unit
-            </th>
+            <th>Precio Unit.</th>
 
-            <th>
-              Total
-            </th>
+            <th>Total</th>
 
-            <th class="no-pdf">
-            </th>
+            <th class="no-pdf"></th>
 
           </tr>
 
@@ -173,60 +132,57 @@
 
       </table>
 
-      <button class="agregar no-pdf" onclick="agregarFila()">
+      <button
+        class="agregar no-pdf"
+        onclick="agregarFila()">
+
         + Agregar Producto
+
       </button>
+
+      <!-- OBSERVACIONES -->
+
+      <section class="observaciones">
+
+        <h3>
+          Observaciones y Condiciones Comerciales
+        </h3>
+
+        <textarea
+          id="observaciones"
+          placeholder="Forma de pago, plazo de entrega, validez del presupuesto, condiciones comerciales, etc."></textarea>
+
+      </section>
+
+      <!-- TOTALES -->
 
       <section class="totales">
 
         <div>
 
-          <span>
-            Subtotal
-          </span>
+          <span>Subtotal</span>
 
-          <strong id="subtotal">
-            $0
-          </strong>
+          <strong id="subtotal">$0</strong>
 
         </div>
 
         <div id="filaIVA">
 
-          <span>
-            IVA 21%
-          </span>
+          <span>IVA 21%</span>
 
-          <strong id="iva">
-            $0
-          </strong>
+          <strong id="iva">$0</strong>
 
         </div>
 
         <div class="final">
 
-          <span>
-            TOTAL
-          </span>
+          <span>TOTAL</span>
 
-          <strong id="total">
-            $0
-          </strong>
+          <strong id="total">$0</strong>
 
         </div>
 
       </section>
-      <section class="observaciones">
-          <h3>
-            Observaciones y Condiciones Comerciales
-          </h3>
-        
-          <textarea
-            id="observaciones"
-            placeholder="Forma de pago, plazo de entrega, validez del presupuesto, condiciones comerciales, etc.">
-          </textarea>  
-      </section>
-      
 
       <div class="nota">
 
@@ -243,3 +199,4 @@
 </body>
 
 </html>
+```
