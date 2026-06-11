@@ -428,7 +428,4 @@ async function generarPDF(){
   );
 
 }
-
-}
-
 agregarFila();
