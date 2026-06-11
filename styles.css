@@ -306,5 +306,33 @@ table input{
   .final{
     font-size:24px !important;
   }
+  .observaciones{
+  margin-top:30px;
+}
+
+.observaciones label{
+  display:block;
+  font-weight:bold;
+  margin-bottom:10px;
+  font-size:16px;
+}
+
+.observaciones textarea{
+  width:100%;
+  min-height:120px;
+  padding:12px;
+  border:1px solid #ccc;
+  border-radius:6px;
+  resize:vertical;
+  font-size:15px;
+}
+
+@media(max-width:900px){
+
+  .observaciones textarea{
+    min-height:100px;
+  }
+
+}
 
 }
