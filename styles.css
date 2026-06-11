@@ -306,32 +306,32 @@ table input{
   .final{
     font-size:24px !important;
   }
+/* OBSERVACIONES */
+
 .observaciones{
+  display:block;
   width:100%;
   margin-top:30px;
+  margin-bottom:30px;
 }
 
 .observaciones h3{
+  width:100%;
   background:#93c83d;
   padding:12px;
-  margin-bottom:0;
   font-size:18px;
   border:2px solid black;
   border-bottom:none;
 }
 
 .observaciones textarea{
+  display:block;
   width:100%;
-  min-height:180px;
+  min-height:250px;
   padding:15px;
   border:2px solid black;
   font-size:15px;
-  line-height:1.5;
+  line-height:1.6;
   resize:vertical;
-  display:block;
-}
-
-.observaciones textarea:focus{
-  outline:none;
 }
 }
