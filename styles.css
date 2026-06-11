@@ -308,31 +308,33 @@ table input{
   }
   .observaciones{
   margin-top:30px;
+  width:100%;
 }
 
 .observaciones label{
   display:block;
   font-weight:bold;
+  font-size:18px;
   margin-bottom:10px;
-  font-size:16px;
 }
 
 .observaciones textarea{
   width:100%;
-  min-height:120px;
-  padding:12px;
-  border:1px solid #ccc;
-  border-radius:6px;
+  min-height:180px;
+  padding:15px;
+  border:2px solid #cfcfcf;
+  border-radius:8px;
   resize:vertical;
-  font-size:15px;
+  font-size:16px;
+  line-height:1.5;
+  background:#fafafa;
 }
 
-@media(max-width:900px){
-
-  .observaciones textarea{
-    min-height:100px;
-  }
-
+.observaciones textarea:focus{
+  outline:none;
+  border-color:#93c83d;
+  background:white;
+}
 }
 
 }
